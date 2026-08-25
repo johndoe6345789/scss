@@ -260,11 +260,20 @@ $select-placeholder-arrow-space: 2 * ($select-arrow-size + $select-arrow-margin)
 
 // Native select variant
 .native {
+  // appearance:none removes the platform chevron. Without a replacement a
+  // <select> is indistinguishable from a text input -- which is how every
+  // native Select rendered. Draw one back, and reserve room so a long value
+  // does not run underneath it.
   appearance: none;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.23);
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%238b949e' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 8px;
+  // Was a hardcoded rgba(0,0,0,0.23): invisible against a dark surface.
+  border: 1px solid var(--mat-sys-outline-variant, rgba(0, 0, 0, 0.23));
   border-radius: 4px;
-  padding: 16.5px 14px;
+  padding: 16.5px 38px 16.5px 14px;
   font: inherit;
   color: inherit;
   width: 100%;
